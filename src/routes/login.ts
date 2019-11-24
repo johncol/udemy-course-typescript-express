@@ -7,7 +7,7 @@ router.get('/login', (request: Request, response: Response) => {
     <form method="POST">
       <div>
         <label for="email">Email</label>
-        <input type="text" name="email" id="email" />
+        <input type="text" name="email" id="email" placeholder="example@domain.com" />
       </div>
       <div>
         <label for="password">Password</label>
