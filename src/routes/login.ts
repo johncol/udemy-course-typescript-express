@@ -1,5 +1,6 @@
 import { Router, Request, Response } from 'express';
 import { RequestWithBody } from './types/express';
+import { credentialsCorrect } from './../login';
 
 const router = Router();
 
@@ -20,8 +21,19 @@ router.get('/login', (request: Request, response: Response) => {
 });
 
 router.post('/login', (request: RequestWithBody, response: Response) => {
-  const { email, password } = request.body;
-  response.send(`Email was ${email} and password was ${password}`);
+  const { email = '', password = '' } = request.body;
+  if (email.length === 0 || password.length === 0) {
+    response.status(403);
+    response.send('Invalid request');
+  }
+
+  if (credentialsCorrect(email, password)) {
+    request.session = { isLogged: true, email };
+    response.redirect('/');
+  } else {
+    response.status(401);
+    response.send('Invalid email or username');
+  }
 });
 
 export { router };
