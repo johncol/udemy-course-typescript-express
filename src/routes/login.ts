@@ -42,8 +42,6 @@ router.get('/logout', (request: RequestWithBody, response: Response) => {
 });
 
 router.get('/', (request: RequestWithBody, response: Response) => {
-  console.log('request.session', request.session);
-
   if (request.session && request.session.isLogged) {
     response.send(`
       <div>
