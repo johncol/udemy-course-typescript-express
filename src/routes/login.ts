@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express';
-import { RequestWithBody } from './types/express';
+import { RequestWithBody } from './../types/express';
 import { credentialsCorrect } from './../login';
 
 const router = Router();
