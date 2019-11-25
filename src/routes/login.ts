@@ -59,4 +59,4 @@ router.get('/', (request: RequestWithBody, response: Response) => {
   }
 });
 
-export { router };
+export { router as loginRouter };
