@@ -36,4 +36,29 @@ router.post('/login', (request: RequestWithBody, response: Response) => {
   }
 });
 
+router.get('/logout', (request: RequestWithBody, response: Response) => {
+  request.session = { isLogged: false };
+  response.redirect('/');
+});
+
+router.get('/', (request: RequestWithBody, response: Response) => {
+  console.log('request.session', request.session);
+
+  if (request.session && request.session.isLogged) {
+    response.send(`
+      <div>
+        <h1>Welcome ${request.session.email}</h1>
+        <a href="/logout">Logout</a>
+      </div>
+    `);
+  } else {
+    response.send(`
+      <div>
+        <h1>Welcome visitor</h1>
+        <a href="/login">Login</a>
+      </div>
+    `);
+  }
+});
+
 export { router };
