@@ -12,4 +12,4 @@ app.use(cookieSession({ keys: ['some-key'] }));
 app.use(loginRouter);
 app.use(protectedRouter);
 
-app.listen(3000, () => console.log('Server started successfully..'));
+app.listen(3000, () => console.log('Server started successfully at http://localhost:3000'));
