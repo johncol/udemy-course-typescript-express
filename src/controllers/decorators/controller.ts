@@ -1,7 +1,5 @@
 import 'reflect-metadata';
-import { Router } from 'express';
-
-export const router = Router();
+import { AppRouter } from './../../AppRouter';
 
 export const controller = (basePath: string) => {
   return (target: Function): void => {
@@ -9,7 +7,7 @@ export const controller = (basePath: string) => {
       const path: string = Reflect.getMetadata('path', target.prototype, key);
       if (path) {
         const handler = target.prototype[key];
-        router.get(`${basePath}/${path}/`, handler);
+        AppRouter.instance.get(`${basePath}/${path}/`, handler);
       }
     }
   };
