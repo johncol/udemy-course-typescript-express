@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { Method, Metadata } from './enums';
 
 const routeBinder = (method: Method) => {
-  return (path: string) => {
+  return (path: string = '') => {
     return (target: any, key: string, descriptor: PropertyDescriptor) => {
       Reflect.defineMetadata(Metadata.path, path, target, key);
       Reflect.defineMetadata(Metadata.method, method, target, key);

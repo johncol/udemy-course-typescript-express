@@ -7,9 +7,11 @@ export const Controller = (basePath: string) => {
     for (let key in target.prototype) {
       const path: string = Reflect.getMetadata(Metadata.path, target.prototype, key);
       const method: Method = Reflect.getMetadata(Metadata.method, target.prototype, key);
-      if (path) {
-        const handlerFn = target.prototype[key];
-        AppRouter.instance[method](`${basePath}/${path}/`, handlerFn);
+      if (path != null) {
+        const handler = target.prototype[key];
+        const route: string = `${basePath}${path}`;
+        console.log(`Registering route for ${method.toUpperCase()} ${route}`);
+        AppRouter.instance[method](route, handler);
       }
     }
   };
