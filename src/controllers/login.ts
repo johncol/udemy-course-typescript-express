@@ -1,9 +1,11 @@
 import { Request, Response } from 'express';
+import { controller } from './decorators/controller';
+import { get } from './decorators/routes';
 
-//@controller('/')
+@controller('/')
 export class LoginController {
-  //@get('/login')
-  getLogin = (request: Request, response: Response): void => {
+  @get('/login')
+  getLogin(request: Request, response: Response): void {
     response.send(`
       <form method="POST">
         <div>
@@ -17,5 +19,5 @@ export class LoginController {
         <input type="submit" />
       </form>
     `);
-  };
+  }
 }
