@@ -1,13 +1,15 @@
 import 'reflect-metadata';
 import { AppRouter } from './../../AppRouter';
+import { Method, Metadata } from './enums';
 
-export const controller = (basePath: string) => {
+export const Controller = (basePath: string) => {
   return (target: Function): void => {
     for (let key in target.prototype) {
-      const path: string = Reflect.getMetadata('path', target.prototype, key);
+      const path: string = Reflect.getMetadata(Metadata.path, target.prototype, key);
+      const method: Method = Reflect.getMetadata(Metadata.method, target.prototype, key);
       if (path) {
-        const handler = target.prototype[key];
-        AppRouter.instance.get(`${basePath}/${path}/`, handler);
+        const handlerFn = target.prototype[key];
+        AppRouter.instance[method](`${basePath}/${path}/`, handlerFn);
       }
     }
   };
