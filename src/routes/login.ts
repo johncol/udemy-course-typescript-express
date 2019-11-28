@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import { RequestWithBody } from './../types/express';
 import { credentialsCorrect } from './../login';
 
+// Not used anymore
 const router = Router();
 
 router.get('/login', (request: Request, response: Response) => {

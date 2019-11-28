@@ -11,4 +11,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieSession({ keys: ['some-key'] }));
 app.use(AppRouter.instance);
 
-app.listen(3000, () => console.log('Server started successfully at http://localhost:3000'));
+app.listen(3000, () => {
+  console.log('Server started successfully at http://localhost:3000');
+});

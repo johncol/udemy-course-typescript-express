@@ -1,6 +1,7 @@
 import { Router, Response, NextFunction } from 'express';
 import { RequestWithBody } from './../types/express';
 
+// Not used anymore
 const router = Router();
 
 const withAuthentication = (request: RequestWithBody, response: Response, next: NextFunction): void => {
