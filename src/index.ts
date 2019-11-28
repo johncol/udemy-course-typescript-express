@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieSession from 'cookie-session';
 
-import './controllers/login';
+import './controllers';
 import { AppRouter } from './AppRouter';
 import { protectedRouter } from './routes/protected';
 

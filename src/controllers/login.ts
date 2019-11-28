@@ -5,26 +5,6 @@ import { credentialsCorrect } from './../login';
 
 @Controller('/')
 export class LoginController {
-  @Get()
-  @Use(LoggerMiddleware)
-  getRoot(request: Request, response: Response): void {
-    if (request.session && request.session.isLogged) {
-      response.send(`
-        <div>
-          <h1>Welcome ${request.session.email}</h1>
-          <a href="/logout">Logout</a>
-        </div>
-      `);
-    } else {
-      response.send(`
-        <div>
-          <h1>Welcome visitor</h1>
-          <a href="/login">Login</a>
-        </div>
-      `);
-    }
-  }
-
   @Get('login')
   @Use(LoggerMiddleware)
   getLogin(request: Request, response: Response): void {
