@@ -1,10 +1,12 @@
 import { Request, Response } from 'express';
-import { Controller, Get, Post } from './decorators';
-import { credentialsCorrect } from '../login';
+import { Controller, Use, Get, Post } from './decorators';
+import { LoggerMiddleware } from './middlewares';
+import { credentialsCorrect } from './../login';
 
 @Controller('/')
 export class LoginController {
   @Get()
+  @Use(LoggerMiddleware)
   getRoot(request: Request, response: Response): void {
     if (request.session && request.session.isLogged) {
       response.send(`
@@ -24,6 +26,7 @@ export class LoginController {
   }
 
   @Get('login')
+  @Use(LoggerMiddleware)
   getLogin(request: Request, response: Response): void {
     response.send(`
       <form method="POST">
@@ -41,6 +44,7 @@ export class LoginController {
   }
 
   @Post('login')
+  @Use(LoggerMiddleware)
   postLogin(request: Request, response: Response): void {
     const { email = '', password = '' } = request.body;
     if (email.length === 0 || password.length === 0) {
@@ -58,6 +62,7 @@ export class LoginController {
   }
 
   @Get('logout')
+  @Use(LoggerMiddleware)
   getLogout(request: Request, response: Response) {
     request.session = { isLogged: false };
     response.redirect('/');
