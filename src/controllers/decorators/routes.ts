@@ -1,9 +1,10 @@
 import 'reflect-metadata';
 import { Method, Metadata } from './enums';
+import { RequestHandlerPropertyDescriptor } from './../../types/request-handler';
 
 const routeBinder = (method: Method) => {
   return (path: string = '') => {
-    return (target: any, key: string, descriptor: PropertyDescriptor) => {
+    return (target: any, key: string, descriptor: RequestHandlerPropertyDescriptor) => {
       Reflect.defineMetadata(Metadata.path, path, target, key);
       Reflect.defineMetadata(Metadata.method, method, target, key);
     };
