@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { Controller, Use, Get, Post } from './decorators';
+import { Controller, Use, Get, Post, RequiredFields } from './decorators';
 import { LoggerMiddleware } from './middlewares';
 import { credentialsCorrect } from './../login';
 
@@ -45,13 +45,9 @@ export class LoginController {
 
   @Post('login')
   @Use(LoggerMiddleware)
+  @RequiredFields('email', 'password')
   postLogin(request: Request, response: Response): void {
-    const { email = '', password = '' } = request.body;
-    if (email.length === 0 || password.length === 0) {
-      response.status(403);
-      response.send('Invalid request');
-    }
-
+    const { email, password } = request.body;
     if (credentialsCorrect(email, password)) {
       request.session = { isLogged: true, email };
       response.redirect('/');
