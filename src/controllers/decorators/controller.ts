@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import { AppRouter } from './../../AppRouter';
 import { Method, Metadata } from './enums';
 import { Middleware } from './use';
-import { hasRequiredFields } from '../middlewares/has-required-fields';
+import { hasRequiredFields } from './../middlewares';
 
 export const Controller = (basePath: string) => {
   return (target: Function): void => {
